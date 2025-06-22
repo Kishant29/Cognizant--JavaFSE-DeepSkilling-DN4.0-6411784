@@ -1,0 +1,55 @@
+interface Document {
+    void open();
+
+    void save();
+}
+
+class WordDocument implements Document {
+    public void open() {
+        System.out.println("Opening Word document");
+    }
+
+    public void save() {
+        System.out.println("Saving Word document");
+    }
+}
+
+class PdfDocument implements Document {
+    public void open() {
+        System.out.println("Opening PDF document");
+    }
+
+    public void save() {
+        System.out.println("Saving PDF document");
+    }
+}
+
+abstract class DocumentFactory {
+    public abstract Document createDocument();
+}
+
+class WordDocumentFactory extends DocumentFactory {
+    public Document createDocument() {
+        return new WordDocument();
+    }
+}
+
+class PdfDocumentFactory extends DocumentFactory {
+    public Document createDocument() {
+        return new PdfDocument();
+    }
+}
+
+public class DocumentFactoryExample {
+    public static void main(String[] args) {
+        DocumentFactory wordFactory = new WordDocumentFactory();
+        Document wordDoc = wordFactory.createDocument();
+        wordDoc.open();
+        wordDoc.save();
+
+        DocumentFactory pdfFactory = new PdfDocumentFactory();
+        Document pdfDoc = pdfFactory.createDocument();
+        pdfDoc.open();
+        pdfDoc.save();
+    }
+}
